@@ -94,6 +94,27 @@ public class RequestManager {
         });
     }
 
+    public void getInstructions(InstructionsListener listener, int id){
+        CallInstructions callInstructions =retrofit.create(CallInstructions.class);
+        Call<List<InstructionsResponse>> call = callInstructions.callInstructions(id, context.getString(R.string.api_key));
+        call.enqueue(new Callback<List<InstructionsResponse>>() {
+            @Override
+            public void onResponse(Call<List<InstructionsResponse>> call, Response<List<InstructionsResponse>> response) {
+                if(!response.isSuccessful()){
+                    listener.didError(response.message());
+                    return;
+                }
+                listener.didFetch(response.body(),response.message());
+            }
+
+            @Override
+            public void onFailure(Call<List<InstructionsResponse>> call, Throwable t) {
+                listener.didError(t.getMessage());
+            }
+        });
+    }
+
+
     private interface CallRandomRecipes{
         @GET("recipes/random")
         Call<RandomRecipeApiResponse> callRandomRecipe(
@@ -117,26 +138,6 @@ public class RequestManager {
                 @Query("number") String number,
                 @Query("apiKey") String apiKey
         );
-    }
-
-    public void getInstructions(InstructionsListener listener, int id){
-        CallInstructions callInstructions =retrofit.create(CallInstructions.class);
-        Call<List<InstructionsResponse>> call = callInstructions.callInstructions(id, context.getString(R.string.api_key));
-        call.enqueue(new Callback<List<InstructionsResponse>>() {
-            @Override
-            public void onResponse(Call<List<InstructionsResponse>> call, Response<List<InstructionsResponse>> response) {
-                if(!response.isSuccessful()){
-                    listener.didError(response.message());
-                    return;
-                }
-                listener.didFetch(response.body(),response.message());
-            }
-
-            @Override
-            public void onFailure(Call<List<InstructionsResponse>> call, Throwable t) {
-                listener.didError(t.getMessage());
-            }
-        });
     }
 
     private interface CallInstructions {

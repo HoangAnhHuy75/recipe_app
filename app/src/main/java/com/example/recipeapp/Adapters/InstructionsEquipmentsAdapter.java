@@ -1,6 +1,7 @@
 package com.example.recipeapp.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,32 +11,35 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recipeapp.Models.Equipment;
 import com.example.recipeapp.Models.Ingredient;
 import com.example.recipeapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class InstructionsIngredientsAdapter extends RecyclerView.Adapter<InstructionIngredientsViewHolder> {
+public class InstructionsEquipmentsAdapter extends RecyclerView.Adapter<InstructionEquipmentsViewHolder> {
     Context context;
-    List<Ingredient> list;
+    List<Equipment> list;
 
-    public InstructionsIngredientsAdapter(Context context, List<Ingredient> list) {
+    public InstructionsEquipmentsAdapter(Context context, List<Equipment> list) {
         this.context = context;
         this.list = list;
     }
 
     @NonNull
     @Override
-    public InstructionIngredientsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new InstructionIngredientsViewHolder(LayoutInflater.from(context).inflate(R.layout.list_instructions_step_items,parent,false));
+    public InstructionEquipmentsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new InstructionEquipmentsViewHolder(LayoutInflater.from(context).inflate(R.layout.list_instructions_step_items,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InstructionIngredientsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull InstructionEquipmentsViewHolder holder, int position) {
+        Log.d("EQUIPMENT_ITEM", "name = " + list.get(position).name);
+        Log.d("EQUIPMENT_ITEM", "image = " + list.get(position).image);
         holder.textView_instructions_step_item.setText(list.get(position).name);
         holder.textView_instructions_step_item.setSelected(true);
-        Picasso.get().load("https://spoonacular.com/cdn/ingredients_100x100/"+list.get(position).image).into(holder.imageView_instructions_step_items);
+        Picasso.get().load(list.get(position).image).into(holder.imageView_instructions_step_items);
     }
 
     @Override
@@ -43,10 +47,10 @@ public class InstructionsIngredientsAdapter extends RecyclerView.Adapter<Instruc
         return list.size();
     }
 }
-class InstructionIngredientsViewHolder extends RecyclerView.ViewHolder{
+class InstructionEquipmentsViewHolder extends RecyclerView.ViewHolder{
     ImageView imageView_instructions_step_items;
     TextView textView_instructions_step_item;
-    public InstructionIngredientsViewHolder(@NonNull View itemView) {
+    public InstructionEquipmentsViewHolder(@NonNull View itemView) {
         super(itemView);
         imageView_instructions_step_items = itemView.findViewById(R.id.imageView_instructions_step_item);
         textView_instructions_step_item = itemView.findViewById(R.id.textView_instructions_step_item);

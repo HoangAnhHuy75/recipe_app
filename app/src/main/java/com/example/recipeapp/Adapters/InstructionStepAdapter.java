@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recipeapp.Models.InstructionsResponse;
 import com.example.recipeapp.Models.Step;
 import com.example.recipeapp.R;
 
@@ -18,6 +20,11 @@ import java.util.List;
 public class InstructionStepAdapter extends RecyclerView.Adapter<InstructionStepViewHolder> {
     Context context;
     List<Step> list;
+
+    public InstructionStepAdapter(Context context, List<Step> list) {
+        this.context = context;
+        this.list = list;
+    }
 
     @NonNull
     @Override
@@ -29,6 +36,14 @@ public class InstructionStepAdapter extends RecyclerView.Adapter<InstructionStep
     public void onBindViewHolder(@NonNull InstructionStepViewHolder holder, int position) {
         holder.textView_instructions_step_number.setText(String.valueOf(list.get(position).number));
         holder.textView_instructions_step_title.setText(list.get(position).step);
+        holder.recycler_instructions_ingredients.setHasFixedSize(true);
+        holder.recycler_instructions_ingredients.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
+        InstructionsIngredientsAdapter instructionsIngredientsAdapter = new InstructionsIngredientsAdapter(context, list.get(position).ingredients);
+        holder.recycler_instructions_ingredients.setAdapter(instructionsIngredientsAdapter);
+        holder.recycler_instructions_equipments.setHasFixedSize(true);
+        holder.recycler_instructions_equipments.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
+        InstructionsEquipmentsAdapter instructionsEquipmentsAdapter = new InstructionsEquipmentsAdapter(context,list.get(position).equipment);
+        holder.recycler_instructions_equipments.setAdapter(instructionsEquipmentsAdapter);
     }
 
     @Override
