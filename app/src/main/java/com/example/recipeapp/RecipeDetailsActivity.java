@@ -26,7 +26,7 @@ import java.util.List;
 
 public class RecipeDetailsActivity extends AppCompatActivity {
     int id;
-    TextView textView_meal_name, textView_meal_source,textView_meal_summary;
+    TextView textView_meal_name, textView_meal_source,textView_meal_summary,recycler_meal_instructions;
     ImageView imageView_meal_image;
     RecyclerView recycler_meal_ingredients, recycler_meal_similar;
     RequestManager manager;
@@ -55,6 +55,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         imageView_meal_image = findViewById(R.id.imageView_meal_image);
         recycler_meal_ingredients = findViewById(R.id.recycler_meal_ingredients);
         recycler_meal_similar = findViewById(R.id.recycler_meal_similar);
+        recycler_meal_instructions = findViewById(R.id.recycler_meal_instructions);
     }
 
     private final RecipeDetailsListener recipeDetailsListener = new RecipeDetailsListener() {
