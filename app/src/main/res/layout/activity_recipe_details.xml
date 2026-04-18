@@ -15,6 +15,7 @@
 
     </Toolbar>
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -32,6 +33,12 @@
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/btn_mic"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@android:drawable/ic_btn_speak_now"
+                android:layout_margin="16dp"/>
             <TextView
                 android:id="@+id/textView_meal_source"
                 android:text="Source"
@@ -67,6 +74,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/text_similar"
                 android:text="Similar Recipes"
                 android:textStyle="bold"
                 android:textColor="@color/white"

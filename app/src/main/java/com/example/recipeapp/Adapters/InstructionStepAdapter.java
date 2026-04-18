@@ -34,6 +34,8 @@ public class InstructionStepAdapter extends RecyclerView.Adapter<InstructionStep
 
     @Override
     public void onBindViewHolder(@NonNull InstructionStepViewHolder holder, int position) {
+        holder.recycler_instructions_ingredients.setNestedScrollingEnabled(false);
+        holder.recycler_instructions_equipments.setNestedScrollingEnabled(false);
         holder.textView_instructions_step_number.setText(String.valueOf(list.get(position).number));
         holder.textView_instructions_step_title.setText(list.get(position).step);
         holder.recycler_instructions_ingredients.setHasFixedSize(true);
